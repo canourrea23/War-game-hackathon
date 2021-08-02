@@ -1,0 +1,47 @@
+* {
+    border: 1px solid red;
+}
+
+body {
+    min-height: 100vh;
+    background-color: green;
+}
+.container, .row {
+    height: 90vh;
+}
+.player {
+    border: 1px solid black;
+    background-color: blue;
+    border-radius: 8%;
+    margin-top: 20%;
+}
+.player img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5%;
+}
+.pc-section {
+    border: 1px solid black;
+    background-color: red;
+    border-radius: 8%;
+    margin-top: 20%;
+}
+
+.pc-section img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5%;
+}
+#card {
+    text-align: center;
+}
+#tracker {
+    text-align: left;
+    padding-top: 8vh;
+}
+h3{
+    text-align: center;
+}
+span {
+    background-color: white;
+}
