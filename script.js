@@ -164,7 +164,7 @@ var playerDeck = [], pcDeck = [], drawIndex;
         if( playerDeck.length > 0 ){
         console.log('Player Won');
         } else {
-        console.log('CPU Won');
+        console.log('PC Won');
         }
         return false;
     }
@@ -173,7 +173,6 @@ var playerDeck = [], pcDeck = [], drawIndex;
         pcCard = pcDeck.shift(),
         rewards = rewards ? rewards : [];
     
-    // Update View for Drawn Cards TODO: Optimize
     const playerSection = document.querySelector('section.player'),
         pcSection = document.querySelector('section.pc'),
         playerCardDiv = playerSection.querySelector('div.card'),
@@ -198,16 +197,15 @@ var playerDeck = [], pcDeck = [], drawIndex;
     // compare cards
     if( playerCard.value === pcCard.value ){
         console.log('tie', playerCard, pcCard);
-        // tie
-        // play another card
+        
         rewards.push(playerCard);
         rewards.push(pcCard);
         return drawAndPlay(rewards);
     } else if( playerCard.value > pcCard.value ){
         // Player wins
         console.log('Player wins round', playerCard, pcCard);
-        // Add point to player score TODO
-        playerPoints.setAttribute('data-points', parseInt(playerPoints.getAttribute('data-points'))+1)
+
+        playerPoints.setAttribute('data-points', parseInt(playerPoints.getAttribute('data-points')) + 1)
         
         // Reward Cards
         playerDeck.splice(playerDeck.length, 0, playerCard, pcCard);
@@ -216,10 +214,8 @@ var playerDeck = [], pcDeck = [], drawIndex;
         }
         
     } else {
-    // CPU Wins
-    console.log('CPU wins round', playerCard, cpuCard);
-    // Add point to CPU score TODO
-    cpuPoints.setAttribute('data-points', parseInt(cpuPoints.getAttribute('data-points'))+1)
+    console.log('Computer wins round', playerCard, pcCard);
+    pcPoints.setAttribute('data-points', parseInt(pcPoints.getAttribute('data-points')) + 1)
     
     // Reward Cards
     pcDeck.splice(pcDeck.length, 0, pcCard, playerCard);
@@ -228,79 +224,16 @@ var playerDeck = [], pcDeck = [], drawIndex;
         }
         
     }
-    
+
     console.log('Player Cards left = '+playerDeck.length, 'PC Cards left = '+pcDeck.length);
     return true;
 };
-
-// const drawAndPlay = function(rewards) {
-//     if( rewards ) {
-//         console.log('rewards = ', rewards);
-//     }
-//     if(playerDeck.length === 0 || pcDeck.length === 0) {
-//         if(playerDeck.length > 0) {
-//             console.log('Player Won')
-//         } else {
-//             console.log('PC Won')
-//         }
-//         return false;
-//     }
-
-//     // pushing to new deck array
-//     var playerCard = playerDeck.shift(),
-//         pcCard = pcDeck.shift()
-//         rewards = rewards ? rewards : []; 
-//         console.log(rewards, 'line 171')
-
-//     const playerCol = document.querySelector('div.player'),
-//         pcCol = document.querySelector('div.pc'),
-//         pcCardDiv = document.querySelector('div.card'),
-//         playerCardDiv = document.querySelector('div.card'),
-//         playerPoints = document.querySelector('[data-points]'),
-//         pcPoints = document.querySelector('[data-points]');
-//         console.log(pcCardDiv);
-//         console.log(playerCardDiv);
-
-//         Card.prototype.suitNameArray.forEach(function(v, i, a) {
-//         playerCardDiv.classList.remove(v);
-//         pcCardDiv.classList.remove(v);
-//         return true;
-//     });
-
-//     playerCardDiv.querySelector('span.name').innerHTML = playerCard.number;
-//     playerCardDiv.classList.add( playerCard.suit );
-//     // playerCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', playerDeck.length);
-    
-//     pcCardDiv.querySelector('span.name').innerHTML = pcCard.number;
-//     pcCardDiv.classList.add( pcCard.suit );
-//     // pcCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', pcDeck.length);
-
-//     // playerCardDiv.querySelector('span.name').innerHTML = playerCard.number;
-//     // playerCardDiv.classList.add( playerCard.suit );
-//     // console.log(playerCard.number, "player");
-//     // console.log(playerCol, '193');
-//     // // playerCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', playerDeck.length);
-    
-//     // pcCardDiv.querySelector('span.name').innerHTML = pcCard.number;
-//     // console.log(pcCard.number, "Hello");
-//     // pcCardDiv.classList.add( pcCard.suit );
-//     // // pcCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', pcDeck.length);
-
-
-//     if(playerCard.value === pcCard.value) {
-//         console.log('tie', playerCard, pcCard);
-//         rewards.push(playerCard)
-//         rewards.push(pcCard)
-//         return drawAndPlay(rewards)
-//     } else if(playerCard.value > pcCard.value) {
-//         console.log('Player wins round', playerCard, pcCard);
-//     }
-// }
 
 
 window.onload = function draw(){
     var btn = document.querySelector('button.draw');
     btn.addEventListener('click', function(event){
+        document.getElementById("rules").classList.add("hidden");
         const keepGoing = drawAndPlay();
         if( !keepGoing ){
         alert('Game Over');

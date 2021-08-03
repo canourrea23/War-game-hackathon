@@ -1,4 +1,4 @@
-* {
+/* * {
     border: 1px solid red;
 }
 
@@ -44,4 +44,139 @@ h3{
 }
 span {
     background-color: white;
+}
+.wrapper {
+    text-align: center;
+} */
+
+*{
+  box-sizing: border-box;
+  
+}
+
+h1{
+  color: darkred;
+}
+
+.hidden, .hide{
+    display: none;
+}
+
+article.wrapper{
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    /* border: 1px solid black; */
+    background-color: azure; 
+    overflow: auto;
+}
+    div.rules{
+    border: 1px solid blue;
+    background-color: black;
+    color: white;
+    }
+
+section{
+    display: block;
+    float: left;
+    width: 50%;
+    height: 100%;
+}    
+    .pc img{
+        width: 100%;
+        height: 100%;
+        border-radius: 5%;
+    }
+#battle-left {
+    margin-left: 10%;
+    margin-top: 10%;
+    height: 30vh;
+    width: 15vw;
+}
+#battle-right {
+    margin-right: 10%;
+    margin-top: 10%;
+    height: 30vh;
+    width: 15vw;
+}
+    .player img{
+        width: 100%;
+        height: 100%;
+        border-radius: 5%;
+    }
+    .right{
+        float: right;
+    }
+    .left{
+        float: left;
+    }
+    .info{
+        padding: 10px;
+    }
+    .card {
+        font-size: 62px;
+        min-height: 220px;
+        padding-top: 18%;
+        width: 40%;
+        height: 80%;
+    }
+        .spades, .clubs {
+            color: black;
+        }
+        .diamonds, .hearts{
+            color: red;
+        }
+        
+        .spades span.name:after{
+            content: "\2660";
+        }
+        .diamonds span.name:after{
+            content: "\2666";
+        }
+        .clubs span.name:after{
+            content: "\2663";
+        }
+        .hearts span.name:after{
+            content: "\2665";
+        }
+            [data-points]::after{
+            content: attr(data-points);
+            margin: 0 0 0 5px;
+        }
+
+        [data-cards-left]::after{
+            content: attr(data-cards-left);
+            margin: 0 0 0 5px;
+        }
+
+        [data-games-won]::after{
+            content: attr(data-games-won);
+            margin: 0 0 0 5px;
+        }
+
+        button.draw {
+        margin: 10px;
+        padding: 10px;
+        font-size: 22px;
+        }
+
+footer {
+    background-color: green;
+}
+#rules.hidden {
+    opacity: 0;
+    transition-duration: 0s;
+}
+.container {
+    text-align: center;
+}
+.container img {
+    height: 150px;
+    border-radius: 50%;
+}
+ul {
+  list-style-type: none;
+  text-align: left;
+  margin: 0;
+  padding: 0;
 }
