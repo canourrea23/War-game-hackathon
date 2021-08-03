@@ -10,4 +10,6 @@
 - Education: Graduated from General Assembely in the beginning of the year.
 - Located: Los Angeles
 - OPEN TO REMOTE
+
 ### [My Portfolio](http://www.carolinaurrearestrepo.com)
+
