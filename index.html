@@ -11,7 +11,70 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <article class="container"> 
+    <article class="wrapper">
+    <header>
+        <h1>♣️ ♥️ WAR ♦️ ♠️</h1>
+        <div class="rules hidden">Rules Go Here!</div>
+    </header>
+    <section class="pc">
+        <div class="row">
+            <div id="card" class="col-2"> your deck  
+                <div class="player">
+                    <div><img src="blue-deck.png" /></div>
+                </div>
+                <div id="tracker">
+                    <div data-points="0">Points:</div>
+                    <div data-cards-left="26">Cards Left:</div>
+                    <div data-games-won="0">Games Won:</div>
+                </div>
+            </div>
+            <div id="card" class="col-8"> <bold><i></i>IS HAPPENING HERE</i></bold>
+                <div class="row">
+                    <div id="card" class="col-6"> Player 
+                        <div class="card right">
+                            <span class="name"></span>
+                        </div>
+                    </div>
+                    <div id="card" class="col-6"> PC Draw
+                        <div class="info right">
+                            <div class="card left">
+                                <span class="name"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card" class="col-2 pc"> PC 
+
+            </div>
+
+        </div>
+        <section class="player">
+            <h2>Computer</h2>
+            <div class="info right">
+            <div data-points="0">Points:</div>
+            <div data-cards-left="26">Cards Left:</div>
+            <div data-games-won="0">Games Won:</div>
+            </div>
+            <div class="card left">
+            <span class="name"></span>
+            </div>
+        </section>
+        <!-- <h2>Computer</h2>
+        <div class="info left">
+        <div data-points="0">Points:</div>
+        <div data-cards-left="26">Cards Left:</div>
+        <div data-games-won="0">Games Won:</div>
+        </div>
+        <div class="card right">
+        <span class="name"></span>
+        </div> -->
+    </section>
+    <footer>
+        <button class="draw">Draw!</button>
+    </footer>
+</article>
+    <!-- <article class="container"> 
         <h3>♣️ ♥️ WAR ♦️ ♠️</h3> 
         <div class="row">
             <div id="card" class="col-2"> your deck  
@@ -32,8 +95,8 @@
                         </div>
                     </div>
                     <div id="card" class="col-6"> PC Draw
-                        <div class="card1 left">
-                        <span class="name1"></span>
+                        <div class="card left">
+                        <span class="name"></span>
                         </div>
                     </div>
                 </div>
@@ -49,6 +112,6 @@
                 </div>
             </div> 
     </article>
-    <span> <button class="draw">Draw!</button></span>
+    <span> <button class="draw">Draw!</button></span> -->
 </body>
 </html>

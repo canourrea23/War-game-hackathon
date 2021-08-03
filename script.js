@@ -80,134 +80,222 @@ console.clear();
 
 // starting function
 
-const Card = (function() {
-    let suitNames = ['spades', 'diamonds', 'clubs', 'hearts'],
+var Card = (function() {
+    var suitNames = ['spades', 'diamonds', 'clubs', 'hearts'],
     suitCodes = ['\u2660', '\u2666', '\u2663', '\u2665'],
-    Card = function(index) {
-        this.index = index; // cards hierarchy
-        this.value = (index % 13) + 1; // position in the array
-        this.suit = suitNames[Math.floor(index / 13)]; // declaring the suit
-    };
-    // For the card that have no value
-    Card.prototype = {
-        get number() {
-            switch(this.value) {
-                case 11:
-                    return 'J';
-                case 12: 
-                    return 'Q';
-                case 13:
-                    return 'K';
-                case 1:
-                    return 'A';
-                default:
-                    return this.value;
-            }
-            return this.value;
-        },
-        get name() {
-            const numberName = (function(n) {
-                switch(n) {
-                    case 'A': return 'Ace';
-                    case 'K': return 'King';
-                    case 'Q': return 'Queen';
-                    case 'J': return 'Jack';
-                    default: return n;
+        Card = function(index) {
+            this.index = index; // cards hierarchy
+            this.value = (index % 13) + 1; // position in the array
+            this.suit = suitNames[Math.floor(index / 13)]; // declaring the suit
+        };
+        // For the card that have no value
+        Card.prototype = {
+            get number() {
+                switch(this.value) {
+                    case 11:
+                        return 'J';
+                    case 12: 
+                        return 'Q';
+                    case 13:
+                        return 'K';
+                    case 1:
+                        return 'A';
+                    default:
+                        return this.value;
                 }
-            })(this.number);
-            return numberName + ' of ' + this.suit;
-        },
-        get suitUnicodeArray() { 
-            return suitCodes; 
-        },
-        get suitNameArray() { 
-            return suitNames; 
+                return this.value;
+            },
+            get name() {
+                var numberName = (function(n) {
+                    switch(n) {
+                        case 'A': return 'Ace';
+                        case 'K': return 'King';
+                        case 'Q': return 'Queen';
+                        case 'J': return 'Jack';
+                        default: return n;
+                    }
+                })(this.number);
+                return numberName + ' of ' + this.suit;
+            },
+            get suitUnicodeArray() { 
+                return suitCodes; 
+            },
+            get suitNameArray() { 
+                return suitNames; 
+            }
         }
-    }
-    return Card;
+        return Card;
 })();
 console.log(new Card(10));
 
 //starting index 0 value of 1, map 52 times 
-const deck = Array.apply(null, Array(52)).map(function(_, i) {
+var deck = Array.apply(null, Array(52)).map(function(_, i) {
     return new Card(i);
 });
 // console.log(deck)
 
 // creating player and Pc decks
-let playerDeck = [];
-let pcDeck = [];
-let drawIndex;
+var playerDeck = [], pcDeck = [], drawIndex;
 
-while(deck.length > 0) {
-    //creating deck for player
-    drawIndex = Math.random() * deck.length;
-    playerDeck.push(deck.splice(drawIndex, 1)[0] );
+    while(deck.length > 0) {
+        //creating deck for player
+        drawIndex = Math.random() * deck.length;
+        playerDeck.push( deck.splice(drawIndex, 1)[0] );
+        // drawIndex = Math.random() * deck.length;
+        // playerDeck.push(deck.splice(drawIndex, 1)[0] );
 
-    console.log('player', playerDeck);
+        console.log('player', playerDeck);
 
-    // creating PC deck
-    drawIndex = Math.random() * deck.length; // random asort to array
-    pcDeck.push(deck.splice(drawIndex, 1)[0] ); //draws first array of deck
-    // console.log(drawIndex, 'drawIndex')
-    console.log(pcDeck, 'pcdeck')
-}
-
-const drawAndPlay = function(rewards) {
-    if( rewards ) {
-        console.log('rewards = ', rewards);
+        // creating PC deck
+        drawIndex = Math.random() * deck.length;
+        pcDeck.push( deck.splice(drawIndex.pc, 1)[0] );
+        // drawIndex = Math.random() * deck.length; // random asort to array
+        // pcDeck.push(deck.splice(drawIndex, 1)[0] ); //draws first array of deck
+        // console.log(drawIndex, 'drawIndex')
+        // console.log(pcDeck, 'pcdeck')
     }
-    if(playerDeck.length === 0 || pcDeck.length === 0) {
-        if(playerDeck.length > 0) {
-            console.log('Player Won')
+
+    var drawAndPlay = function(rewards){
+    if( rewards ){ console.log('rewards = ', rewards); }
+    
+    // if either deck is empty, game over
+    if( playerDeck.length === 0 || pcDeck.length === 0 ){
+        // game over
+        if( playerDeck.length > 0 ){
+        console.log('Player Won');
         } else {
-            console.log('PC Won')
+        console.log('CPU Won');
         }
         return false;
     }
-
-    // pushing to new deck array
+    // draw card from each deck
     var playerCard = playerDeck.shift(),
-        pcCard = pcDeck.shift()
-        rewards = rewards ? rewards : []; 
-        console.log(rewards, 'line 171')
-
-    const playerCol = document.querySelector('div.player'),
-        pcCol = document.querySelector('div.pc'),
-        pcCardDiv = document.querySelector('div.card1'),
-        playerCardDiv = document.querySelector('div.card'),
-        playerPoints = document.querySelector('[data-points]'),
-        pcPoints = document.querySelector('[data-points]');
-        console.log(pcCardDiv);
-        console.log(playerCardDiv);
-
-        Card.prototype.suitNameArray.forEach(function(v, i, a) {
+        pcCard = pcDeck.shift(),
+        rewards = rewards ? rewards : [];
+    
+    // Update View for Drawn Cards TODO: Optimize
+    const playerSection = document.querySelector('section.player'),
+        pcSection = document.querySelector('section.pc'),
+        playerCardDiv = playerSection.querySelector('div.card'),
+        pcCardDiv = pcSection.querySelector('div.card'),
+        playerPoints = playerSection.querySelector('[data-points]'),
+        pcPoints = pcSection.querySelector('[data-points]');
+    
+    Card.prototype.suitNameArray.forEach(function(v,i,a){
         playerCardDiv.classList.remove(v);
         pcCardDiv.classList.remove(v);
         return true;
     });
-
+    
     playerCardDiv.querySelector('span.name').innerHTML = playerCard.number;
     playerCardDiv.classList.add( playerCard.suit );
-    console.log(playerCard.number, "player");
-    console.log(playerCol, '193');
-    // playerCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', playerDeck.length);
+    playerSection.querySelector('div[data-cards-left]').setAttribute('data-cards-left', playerDeck.length);
     
-    pcCardDiv.querySelector('span.name1').innerHTML = pcCard.number;
-    console.log(pcCard.number, "Hello");
+    pcCardDiv.querySelector('span.name').innerHTML = pcCard.number;
     pcCardDiv.classList.add( pcCard.suit );
-    // pcCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', pcDeck.length);
-
-
-    if(playerCard.value === pcCard.value) {
+    pcSection.querySelector('div[data-cards-left]').setAttribute('data-cards-left', pcDeck.length);
+    
+    // compare cards
+    if( playerCard.value === pcCard.value ){
         console.log('tie', playerCard, pcCard);
-        rewards.push(playerCard)
-        rewards.push(pcCard)
-        return drawAndPlay(rewards)
-    } else if(playerCard.value > pcCard.value) {
+        // tie
+        // play another card
+        rewards.push(playerCard);
+        rewards.push(pcCard);
+        return drawAndPlay(rewards);
+    } else if( playerCard.value > pcCard.value ){
+        // Player wins
         console.log('Player wins round', playerCard, pcCard);
+        // Add point to player score TODO
+        playerPoints.setAttribute('data-points', parseInt(playerPoints.getAttribute('data-points'))+1)
+        
+        // Reward Cards
+        playerDeck.splice(playerDeck.length, 0, playerCard, pcCard);
+        if( rewards.length > 0 ){
+        playerDeck = playerDeck.concat(rewards);
+        }
+        
+    } else {
+    // CPU Wins
+    console.log('CPU wins round', playerCard, cpuCard);
+    // Add point to CPU score TODO
+    cpuPoints.setAttribute('data-points', parseInt(cpuPoints.getAttribute('data-points'))+1)
+    
+    // Reward Cards
+    pcDeck.splice(pcDeck.length, 0, pcCard, playerCard);
+    if( rewards.length > 0 ){
+        pcDeck = pcDeck.concat(rewards);
+        }
+        
     }
-}
+    
+    console.log('Player Cards left = '+playerDeck.length, 'PC Cards left = '+pcDeck.length);
+    return true;
+};
+
+// const drawAndPlay = function(rewards) {
+//     if( rewards ) {
+//         console.log('rewards = ', rewards);
+//     }
+//     if(playerDeck.length === 0 || pcDeck.length === 0) {
+//         if(playerDeck.length > 0) {
+//             console.log('Player Won')
+//         } else {
+//             console.log('PC Won')
+//         }
+//         return false;
+//     }
+
+//     // pushing to new deck array
+//     var playerCard = playerDeck.shift(),
+//         pcCard = pcDeck.shift()
+//         rewards = rewards ? rewards : []; 
+//         console.log(rewards, 'line 171')
+
+//     const playerCol = document.querySelector('div.player'),
+//         pcCol = document.querySelector('div.pc'),
+//         pcCardDiv = document.querySelector('div.card'),
+//         playerCardDiv = document.querySelector('div.card'),
+//         playerPoints = document.querySelector('[data-points]'),
+//         pcPoints = document.querySelector('[data-points]');
+//         console.log(pcCardDiv);
+//         console.log(playerCardDiv);
+
+//         Card.prototype.suitNameArray.forEach(function(v, i, a) {
+//         playerCardDiv.classList.remove(v);
+//         pcCardDiv.classList.remove(v);
+//         return true;
+//     });
+
+//     playerCardDiv.querySelector('span.name').innerHTML = playerCard.number;
+//     playerCardDiv.classList.add( playerCard.suit );
+//     // playerCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', playerDeck.length);
+    
+//     pcCardDiv.querySelector('span.name').innerHTML = pcCard.number;
+//     pcCardDiv.classList.add( pcCard.suit );
+//     // pcCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', pcDeck.length);
+
+//     // playerCardDiv.querySelector('span.name').innerHTML = playerCard.number;
+//     // playerCardDiv.classList.add( playerCard.suit );
+//     // console.log(playerCard.number, "player");
+//     // console.log(playerCol, '193');
+//     // // playerCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', playerDeck.length);
+    
+//     // pcCardDiv.querySelector('span.name').innerHTML = pcCard.number;
+//     // console.log(pcCard.number, "Hello");
+//     // pcCardDiv.classList.add( pcCard.suit );
+//     // // pcCol.querySelector('div[data-cards-left]').setAttribute('data-cards-left', pcDeck.length);
+
+
+//     if(playerCard.value === pcCard.value) {
+//         console.log('tie', playerCard, pcCard);
+//         rewards.push(playerCard)
+//         rewards.push(pcCard)
+//         return drawAndPlay(rewards)
+//     } else if(playerCard.value > pcCard.value) {
+//         console.log('Player wins round', playerCard, pcCard);
+//     }
+// }
 
 
 window.onload = function draw(){
