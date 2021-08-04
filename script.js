@@ -228,7 +228,7 @@ var playerDeck = [], pcDeck = [], drawIndex;
     console.log('Player Cards left = '+playerDeck.length, 'PC Cards left = '+pcDeck.length);
     return true;
 };
-
+// trying to push changes
 
 window.onload = function draw(){
     var btn = document.querySelector('button.draw');
