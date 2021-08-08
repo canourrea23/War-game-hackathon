@@ -25,7 +25,7 @@ article.wrapper{
     color: white;
     }
 
-section{
+div.player, .pc{
     display: block;
     float: left;
     width: 50%;

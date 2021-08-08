@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
 
@@ -17,7 +17,7 @@
         <h1>♣️ ♥️ WAR ♦️ ♠️</h1>
         <div id="rules" class="rules">Card with highest value wins battle, get all the cards and win the WAR!</div>
     </header>
-    <section class="pc">
+    <div class="pc">
         <h2>Computer</h2>
         <div class="info left">
         <div><img src="blue-deck.png" /></div>
@@ -27,8 +27,8 @@
         <div id="battle-left" class="card left">
         <span class="name"></span>
         </div>
-    </section>
-    <section class="player">
+    </div>
+    <div class="player">
         <h2>You</h2>
         <div class="info right">
         <div><img src="red-deck.png" /></div>
@@ -38,7 +38,7 @@
         <div id="battle-right" class="card right">
         <span class="name"></span>
         </div>
-    </section>
+    </div>
     <footer>
         <button class="draw">Draw!</button>
     </footer>
